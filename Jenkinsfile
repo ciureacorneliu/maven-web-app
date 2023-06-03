@@ -11,6 +11,9 @@ node{
     }
     
     
+    
+    
+    
     stage('Deploy'){
         sshagent(['Tomcat-Agent']) {
             sh 'scp -o StrictHostKeyChecking=no target/01-maven-web-app.war ubuntu@44.201.243.208:/opt/tomcat/apache-tomcat-9.0.75/webapps'
