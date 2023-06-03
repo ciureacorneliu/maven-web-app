@@ -1,8 +1,6 @@
 properties([pipelineTriggers([githubPush()])])
 
 node {
-    
-    
     stage('Maven Build'){
         def mavenHome = tool name: "Maven-3.9.2", type: "maven"
         def mavenCMD = "${mavenHome}/bin/mvn"
