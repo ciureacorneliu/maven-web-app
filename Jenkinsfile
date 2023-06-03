@@ -1,4 +1,8 @@
-node{
+properties([pipelineTriggers([githubPush()])])
+
+node {
+    git url: 'https://github.com/cciureacorneliu/maven-web-app.git', branch: 'master'
+    
     
     stage('Maven Build'){
         def mavenHome = tool name: "Maven-3.9.2", type: "maven"
@@ -10,7 +14,6 @@ node{
         nexusArtifactUploader artifacts: [[artifactId: '01-maven-web-app', classifier: '', file: 'target/01-maven-web-app.war', type: 'war']], credentialsId: 'Nexus-Credentials', groupId: 'in.version', nexusUrl: 'nexus.ciurea.online', nexusVersion: 'nexus3', protocol: 'https', repository: 'maven-snapshot-repo', version: '1.0-SNAPSHOT'
     }
     
-    # kxdvlvskbv
     
     stage('Deploy'){
         sshagent(['Tomcat-Agent']) {
